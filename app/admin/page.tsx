@@ -1,6 +1,7 @@
 import Link from 'next/link';
+export const dynamic = 'force-dynamic';
 import { api } from '@/lib/api';
-
+export const dynamic = 'force-dynamic';
 const STATUS_LABELS: Record<string, string> = {
   pending_payment: 'Ödeme bekliyor',
   paid: 'Ödendi',
