@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-ink font-body antialiased;
+  }
+
+  /* WCAG 2.2 AA — klavye navigasyonu için görünür focus (madde 3.4) */
+  :focus-visible {
+    outline: 2px solid theme('colors.brass.DEFAULT');
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: theme('colors.brass.DEFAULT');
+    color: theme('colors.brass.ink');
+  }
+}
+
+/* prefers-reduced-motion desteği zorunlu (madde 3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Delikli bilet kenarı — kartın alt/üst şeridini ayıran "punch hole" efekti.
+   Tasarımın imza öğesi: ürün kartları birer erişim/bilet kartı gibi kesiliyor. */
+.ticket-perforation {
+  position: relative;
+  border-top: 1px dashed theme('colors.border.strong');
+}
+
+.ticket-perforation::before,
+.ticket-perforation::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: theme('colors.bg.DEFAULT');
+  border: 1px solid theme('colors.border.strong');
+}
+
+.ticket-perforation::before {
+  left: -7px;
+}
+
+.ticket-perforation::after {
+  right: -7px;
+}
